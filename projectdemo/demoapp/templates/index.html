@@ -1,0 +1,13 @@
+{% extends 'theme.html' %}
+ {% block content %}
+{% for product1  in product %}
+  <div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{product1.name}}</h5>
+    <p class="card-text">{{product1.price}}</p>
+    <a href="#" class="btn btn-primary">{{product1.image}}</a>
+  </div>
+</div>
+{% endfor %}
+  {% endblock %}
