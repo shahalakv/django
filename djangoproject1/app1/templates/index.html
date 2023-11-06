@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{%load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>product details</h1>
+{% for product in product1 %}
+<h2>name:{{product.name}}</h2>
+<h2>price:{{product.price}}</h2>
+{% endfor %}
+<h1>index</h1>
+<h1>name:{{name}}</h1>
+<h1>year:{{year}}</h1>
+{%for student in students%}
+{{student.name}}
+{{student.year}}
+{%endfor%}
+<ul>
+    <li>
+        <img src="{% static 'images/flowers1.jpg'%}" alt="image not found">
+    </li>
+    <li><a href="{% url 'edit' %}">edit</a> </li>
+</ul>
+
+</body>
+</html>
