@@ -1,0 +1,29 @@
+{% extends 'usertemp/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="card" style="width:600px;margin-left:100px;margin-top:70px;">
+ <table class="table">
+  <tbody>
+  <tr class="table-info">
+      <th scope="col">subject</th>
+      <th scope="col">complaint</th>
+      <th scope="col">date</th>
+      <th></th>
+    </tr>
+  {% for i in new %}
+  <tr>
+      <td>{{i.subject}}</td>
+      <td>{{i.complaint}}</td>
+      <td>{{i.date}}</td>
+       <td>
+         {% if i.replay == None %}
+    <p>no replay</p>
+           {% else %}
+           {{ i.replay }}
+           {% endif %}
+       </td>
+  </tr>
+    {% endfor %}
+</table>
+</div>
+{% endblock %}

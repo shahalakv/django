@@ -1,0 +1,16 @@
+{% extends 'usertemp/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<body class="p-3 mb-2 bg-danger-subtle text-emphasis-danger">
+<div>
+<div class="card  mb-3" style="width:600px;margin-left:200px;margin-top:70px;">
+  <form method="post">
+ {% csrf_token %}
+
+    {{form|crispy}}
+    <input type="submit" value="submit">
+
+</form>
+  </div>
+</div>
+{% endblock %}

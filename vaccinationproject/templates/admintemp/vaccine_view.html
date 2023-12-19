@@ -1,0 +1,25 @@
+{% extends 'admintemp/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="card" style="width: 18rem;">
+ <table class="table">
+  <tbody>
+  <tr class="table-info">
+      <th scope="col">vaccine_name</th>
+      <th scope="col">type</th>
+      <th scope="col">description</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  {% for i in new %}
+  <tr>
+      <td>{{i.vaccine_name}}</td>
+      <td>{{i.type}}</td>
+      <td>{{i.description}}</td>
+      <td><a href="{% url 'vaccine_update' i.id %}"><button>Update</button></a></td>
+      <td><a href="{% url 'vaccine_delete' i.id %}"><button>Delete</button></a></td>
+  </tr>
+    {% endfor %}
+</table>
+</div>
+{% endblock %}

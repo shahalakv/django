@@ -1,0 +1,20 @@
+{% extends 'usertemp/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="card" style="width:600px;margin-left:100px;margin-top:70px;">
+ <table class="table">
+  <tbody>
+  <tr class="table-info">
+      <th scope="col">Patient_name</th>
+      <th scope="col">Vaccine</th>
+    </tr>
+  {% for i in new %}
+  <tr>
+      <td>{{i.patient_name}}</td>
+      <td>{{i.vaccine}}</td>
+
+  </tr>
+    {% endfor %}
+</table>
+</div>
+{% endblock %}

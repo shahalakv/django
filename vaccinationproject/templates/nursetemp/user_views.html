@@ -1,0 +1,26 @@
+{% extends 'nursetemp/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="card" style="width: 18rem;">
+ <table class="table">
+  <tbody>
+  <tr class="table-info">
+      <th scope="col">Username</th>
+      <th scope="col">Address</th>
+      <th scope="col">Child_name</th>
+      <th scope="col">Child_age</th>
+      <th scope="col">Gender</th>
+
+    </tr>
+  {% for i in new %}
+  <tr>
+      <td>{{i.username}}</td>
+      <td>{{i.address}}</td>
+      <td>{{i.child_name}}</td>
+       <td>{{i.child_age}}</td>
+       <td>{{i.gender}}</td>
+  </tr>
+    {% endfor %}
+</table>
+</div>
+{% endblock %}
