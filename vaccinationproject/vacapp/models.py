@@ -20,21 +20,22 @@ class Hospital(models.Model):
 
     def __str__(self):
         return self.name or f"Hospital {self.id}"
+
 class Vaccine(models.Model):
-    vaccine_name = models.CharField(max_length=250,blank=True, null=True)
-    type = models.CharField(max_length=250,blank=True, null=True)
-    description = models.CharField(max_length=250,blank=True, null=True)
+    vaccine_name = models.CharField(max_length=250, blank=True, null=True)
+    type = models.CharField(max_length=250, blank=True, null=True)
+    description = models.CharField(max_length=250, blank=True, null=True)
+
+    def __str__(self):
+        return self.vaccine_name or f"Vaccine {self.id}"
+
 
 class Appointment(models.Model):
     date = models.DateField(blank=True, null=True)
-    hospital = models.ForeignKey(Hospital,on_delete=models.CASCADE)
+    hospital = models.ForeignKey(Hospital, on_delete=models.CASCADE)
     start_time = models.TimeField(blank=True, null=True)
     end_time = models.TimeField(blank=True, null=True)
-    status = models.CharField(max_length=200)
-
-class Reportcard(models.Model):
-    patient_name = models.CharField(max_length=250,blank=True, null=True)
-    vaccine = models.CharField(max_length=250,blank=True, null=True)
+    vaccine = models.ForeignKey(Vaccine, on_delete=models.CASCADE)
 
 class Complaint(models.Model):
     user = models.ForeignKey(Vaccination, on_delete=models.DO_NOTHING)
@@ -47,6 +48,12 @@ class Complaint(models.Model):
 class Book_Appointment(models.Model):
     user = models.ForeignKey(Vaccination, on_delete=models.CASCADE)
     schedule = models.ForeignKey(Appointment, on_delete=models.CASCADE)
-    vaccine_name = models.ForeignKey(Vaccine, on_delete=models.CASCADE)
-    status = models.CharField(max_length=200, blank=True, null=True)
-    vaccine = models.CharField(max_length=200, blank=True, null=True)
+    status = models.IntegerField(default=0)
+    vaccine_name = models.CharField(max_length=250, blank=True, null=True)
+    vaccinated = models.BooleanField(default=False)
+
+class Report_Card(models.Model):
+    user = models.ForeignKey(Vaccination,on_delete=models.DO_NOTHING)
+    child_age = models.IntegerField()
+    date = models.DateField()
+    vaccine = models.CharField(max_length=200)

@@ -1,7 +1,10 @@
+from urllib import request
+
+from django.contrib import messages
 from django.shortcuts import redirect, render
 
 from vacapp.form import AppointmentForm, ComplaintForm
-from vacapp.models import Appointment, Complaint, Vaccine, Vaccination, Hospital
+from vacapp.models import Appointment, Complaint, Vaccine, Vaccination, Hospital, Book_Appointment
 
 
 def vaccine_views(request):
@@ -81,3 +84,16 @@ def schedule_deletes(request, dl):
     taskdelete = Appointment.objects.get(id=dl)
     taskdelete.delete()
     return redirect("schedule_views")
+
+
+def view_book_appointments(request):
+    new = Book_Appointment.objects.filter(status=1).order_by('schedule__date')
+    return render(request, 'nursetemp/view_book_appointments.html', {"new": new})
+def vaccination(request,id):
+    n = Book_Appointment.objects.get(id=id)
+    print(n)
+    n.vaccinated = 1
+    n.save()
+    messages.info(request, 'Vaccinated')
+    return redirect('view_book_appointments')
+

@@ -5,15 +5,19 @@
  <table class="table">
   <tbody>
   <tr class="table-info">
-      <th scope="col">Patient_name</th>
-      <th scope="col">Vaccine</th>
+      <th scope="col">CHILD NAME</th>
+      <th scope="col">CHILD AGE</th>
+      <th scope="col">DATE</th>
+      <th scope="col">VACCINE</th>
       <th scope="col"></th>
       <th scope="col"></th>
     </tr>
   {% for i in new %}
   <tr>
-      <td>{{i.patient_name}}</td>
-      <td>{{i.vaccine}}</td>
+      <td>{{i.user.child_name}}</td>
+      <td>{{i.user.child_age}}</td>
+      <td>{{i.schedule.date}}</td>
+      <td>{{i.schedule.vaccine}}</td>
       <td><a href="{% url 'reportcard_update' i.id %}"><button>Update</button></a></td>
       <td><a href="{% url 'reportcard_delete' i.id %}"><button>Delete</button></a></td>
   </tr>

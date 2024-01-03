@@ -1,0 +1,40 @@
+{% extends 'nursetemp/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="card" style="margin-left:30px;margin-top:70px;">
+ <table class="table">
+  <tbody>
+  <tr class="table-info">
+      <th scope="col">CHILD NAME</th>
+      <th scope="col">CHILD AGE</th>
+      <th scope="col">HOSPITAL</th>
+      <th scope="col">DATE</th>
+      <th scope="col">START TIME</th>
+      <th scope="col">END TIME</th>
+      <th scope="col">VACCINE</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  {% for i in new %}
+  <tr>
+      <td>{{i.user.child_name}}</td>
+      <td>{{i.user.child_age}}</td>
+      <td>{{i.schedule.hospital}}</td>
+      <td>{{i.schedule.date}}</td>
+      <td>{{i.schedule.start_time}}</td>
+      <td>{{i.schedule.end_time}}</td>
+      <td>{{i.schedule.vaccine}}</td>
+      <td>
+          {% if i.vaccinated == 0 %}
+          <a href="{% url 'vaccination' i.id %}">
+              <button type="button" style="display:inline">Mark Vaccinated</button></a>
+           {% else %}
+         <button type="button" class="btn btn-success">vaccinated</button>
+      </td>
+  </tr>
+  {% endif %}
+      {% endfor %}
+ </table>
+  </tbody>
+</div>
+  {% endblock %}

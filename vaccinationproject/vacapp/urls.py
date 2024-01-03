@@ -29,7 +29,7 @@ urlpatterns = [
     path('vaccine_update/<int:up>', admin_views.vaccine_update, name='vaccine_update'),
     path('vaccine_delete/<int:dl>', admin_views.vaccine_delete, name='vaccine_delete'),
 
-    path('reportcard', admin_views.reportcard, name='reportcard'),
+    path('reportcard/<int:id>', admin_views.reportcard, name='reportcard'),
     path('reportcard_view', admin_views.reportcard_view, name='reportcard_view'),
     path('reportcard_update/<int:up>', admin_views.reportcard_update, name='reportcard_update'),
     path('reportcard_delete/<int:dl>', admin_views.reportcard_delete, name='reportcard_delete'),
@@ -43,6 +43,10 @@ urlpatterns = [
     path('complaint_delete/<int:dl>', admin_views.complaint_delete, name='complaint_delete'),
     path('complaint_replay/<int:id>', admin_views.complaint_replay, name='complaint_replay'),
 
+    path('book_appointment_view', admin_views.book_appointment_view, name='book_appointment_view'),
+    path('approve_appointment/<int:id>', admin_views.approve_appointment, name='approve_appointment'),
+    path('reject_appointment/<int:id>', admin_views.reject_appointment, name='reject_appointment'),
+    path('vaccination_view', admin_views.vaccination_view, name='vaccination_view'),
     path('vaccine_views', nurse_views.vaccine_views, name='vaccine_views'),
     path('user_views', nurse_views.user_views, name='user_views'),
     path('hospital_views', nurse_views.hospital_views, name='hospital_views'),
@@ -51,6 +55,9 @@ urlpatterns = [
     path('schedule_views', nurse_views.schedule_views, name='schedule_views'),
     path('schedule_updates/<int:up>', nurse_views.schedule_updates, name='schedule_updates'),
     path('schedule_deletes/<int:dl>', nurse_views.schedule_deletes, name='schedule_deletes'),
+
+    path('view_book_appointments/', nurse_views.view_book_appointments, name='view_book_appointments'),
+    path('vaccination/<int:id>', nurse_views.vaccination, name='vaccination'),
 
     path('complaints', nurse_views.complaints, name='complaints'),
     path('complaint_views', nurse_views.complaint_views, name='complaint_views'),
@@ -70,5 +77,6 @@ urlpatterns = [
     path('reportcard_viewz', user_views.reportcard_viewz, name='reportcard_viewz'),
     path('profile', user_views.profile, name='profile'),
     path('profile_view', nurse_views.profile_view, name='profile_view'),
+    path('view_appointment', user_views.view_appointment, name='view_appointment'),
 
 ]

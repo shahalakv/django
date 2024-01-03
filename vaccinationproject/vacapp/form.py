@@ -1,5 +1,5 @@
 from django.contrib.auth.forms import UserCreationForm
-from vacapp.models import Vaccination, Hospital, Vaccine, Appointment, Reportcard, Complaint, Book_Appointment
+from vacapp.models import Vaccination, Hospital, Vaccine, Appointment, Complaint, Book_Appointment, Report_Card
 from django import forms
 
 class UserForm(UserCreationForm):
@@ -31,13 +31,7 @@ class AppointmentForm(forms.ModelForm):
 
     class Meta:
         model = Appointment
-        fields = ('hospital', 'date', 'start_time', 'end_time')
-
-class ReportcardForm(forms.ModelForm):
-
-    class Meta:
-        model =Reportcard
-        fields = ('patient_name', 'vaccine')
+        fields = ('hospital', 'date', 'start_time', 'end_time','vaccine')
 
 class ComplaintForm(forms.ModelForm):
 
@@ -49,4 +43,10 @@ class Book_AppointmentForm(forms.ModelForm):
 
     class Meta:
         model = Book_Appointment
-        fields = ('schedule', 'vaccine_name', 'vaccine', 'status')
+        fields = ('user', 'schedule', 'vaccine_name', 'vaccinated', 'status')
+
+class Report_CardForm(forms.ModelForm):
+
+    class Meta:
+        model = Report_Card
+        fields = ('user', 'child_age', 'date', 'vaccine')

@@ -44,7 +44,6 @@ def phy_reg(request):
     return render(request, 'phy_reg.html', {'form': form})
 
 
-
 def admin_page(request):
     return render(request, 'admin_page.html')
 
@@ -59,7 +58,7 @@ def login_view(request):
     if request.method == 'POST':
         username = request.POST.get('uname')
         password = request.POST.get('pass')
-        user = authenticate(request, username=username,password=password)
+        user = authenticate(request, username=username, password=password)
         print(user)
         if user is not None:
             login(request, user)
@@ -70,8 +69,9 @@ def login_view(request):
             elif user.is_physician:
                 return redirect('physician_page')
         else:
-            messages.error(request,'invalid')
-    return render(request,'login.html')
+            messages.error(request, 'invalid')
+    return render(request, 'login.html')
+
 def logout_view(request):
     logout(request)
     return redirect('index')

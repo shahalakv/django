@@ -1,8 +1,9 @@
+from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from vacapp.form import NurseForm, UserForm, HospitalForm, VaccineForm, AppointmentForm, ReportcardForm, ComplaintForm
-from vacapp.models import Vaccination, Hospital, Vaccine, Appointment, Reportcard, Complaint
+from vacapp.form import NurseForm, UserForm, HospitalForm, VaccineForm, AppointmentForm, ComplaintForm, Report_CardForm
+from vacapp.models import Vaccination, Hospital, Vaccine, Appointment, Complaint, Book_Appointment, Report_Card
 
 
 @login_required(login_url='login_view')
@@ -131,28 +132,27 @@ def vaccine_delete(request, dl):
 
 
 @login_required(login_url='login_view')
-def reportcard(request):
-    form = ReportcardForm()
+def reportcard(request, id):
+    form = Book_Appointment.objects.get(id=id)
     if request.method == 'POST':
-        form = ReportcardForm(request.POST)
+        form = Report_CardForm(request.POST)
         if form.is_valid():
             form.save()
         return redirect('reportcard_view')
     return render(request, 'admintemp/reportcard.html', {'form': form})
 
-
 @login_required(login_url='login_view')
 def reportcard_view(request):
-    new = Reportcard.objects.all()
+    new = Report_Card.objects.all()
     return render(request, 'admintemp/reportcard_view.html', {'new': new})
 
 
 @login_required(login_url='login_view')
 def reportcard_update(request, up):
-    taskupdate = Reportcard.objects.get(id=up)
-    updateform = ReportcardForm(instance=taskupdate)
+    taskupdate = Report_Card.objects.get(id=up)
+    updateform = Report_CardForm(instance=taskupdate)
     if request.method == 'POST':
-        updateform = ReportcardForm(request.POST, instance=taskupdate)
+        updateform = Report_CardForm(request.POST, instance=taskupdate)
         if updateform.is_valid():
             updateform.save()
             return redirect("reportcard_view")
@@ -161,7 +161,7 @@ def reportcard_update(request, up):
 
 @login_required(login_url='login_view')
 def reportcard_delete(request, dl):
-    taskdelete = Reportcard.objects.get(id=dl)
+    taskdelete = Report_Card.objects.get(id=dl)
     taskdelete.delete()
     return redirect("reportcard_view")
 
@@ -226,3 +226,26 @@ def complaint_replay(request, id):
         form.save()
         return redirect('complaint_view')
     return render(request, 'admintemp/complaint_replay.html', {'form': form})
+
+def book_appointment_view(request):
+    new = Book_Appointment.objects.all()
+    return render(request, 'admintemp/book_appointment_view.html', {"new": new})
+def approve_appointment(request,id):
+    n = Book_Appointment.objects.get(id=id)
+    n.status = 1
+    n.save()
+    messages.info(request,'Appointment confirmed')
+    return redirect('book_appointment_view')
+
+def reject_appointment(request,id):
+    n = Book_Appointment.objects.get(id=id)
+    n.status = 2
+    n.save()
+    messages.info(request,'Appointment rejected')
+    return redirect('book_appointment_view')
+
+
+def vaccination_view(request):
+    new = Book_Appointment.objects.filter(status=1)
+    return render(request, 'admintemp/vaccination_view.html', {"new": new})
+

@@ -151,15 +151,15 @@
             </a>
             <div class="collapse " id="ui-basic">
               <ul class="nav flex-column sub-menu">
-<!--                <li class="nav-item">-->
-<!--                  <a class="nav-link" href="">Add Appointment</a>-->
-<!--                </li>-->
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'book_appointment_view' %}">Book Appointment</a>
+                </li>
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'appointment_view' %}"> View Appointment</a>
                 </li>
-<!--                <li class="nav-item">-->
-<!--                  <a class="nav-link" href="pages/ui-features/typography.html"></a>-->
-<!--                </li>-->
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'vaccination_view' %}">Vaccination</a>
+                </li>
               </ul>
             </div>
           </li>
@@ -192,9 +192,9 @@
             </a>
             <div class="collapse " id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'reportcard' %}">Add Reportcard</a>
-                </li>
+<!--                <li class="nav-item">-->
+<!--                  <a class="nav-link" href="">Add Reportcard</a>-->
+<!--                </li>-->
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'reportcard_view' %}"> View Reportcard</a>
                 </li>
@@ -1026,5 +1026,6 @@
     <!-- Custom js for this page -->
     <script src="{% static 'dashboard/assets/js/dashboard.js' %}"></script>
     <!-- End custom js for this page -->
-  </body>
+
+    </div></body>
 </html>

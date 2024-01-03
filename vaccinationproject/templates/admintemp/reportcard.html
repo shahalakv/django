@@ -6,8 +6,14 @@
 <div class="card  mb-3" style="width:600px;margin-left:200px;margin-top:70px;">
   <form method="post">
  {% csrf_token %}
-
-    {{form|crispy}}
+      <label class="form-control-label">Child_Name</label>
+      <input required class="form-control" readonly value="{{form.user.child_name}}">
+      <label class="form-control-label">Child_Age</label>
+      <input required class="form-control" readonly value="{{form.user.child_age}}">
+      <label class="form-control-label">Date</label>
+      <input required class="form-control" readonly value="{{form.schedule.date}}">
+      <label class="form-control-label">Vaccine</label>
+      <input required class="form-control" readonly value="{{form.schedule.vaccine}}">
     <input type="submit" value="submit">
 
 </form>

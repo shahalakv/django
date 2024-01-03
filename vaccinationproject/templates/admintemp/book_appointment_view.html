@@ -1,0 +1,56 @@
+{% extends 'admintemp/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="card" style="margin-left:100px;margin-top:70px;">
+ <table class="table">
+  <tbody>
+  <tr class="table-info">
+      <th scope="col">CHILD NAME</th>
+      <th scope="col">CHILD AGE</th>
+      <th scope="col">DATE</th>
+      <th scope="col">HOSPITAL</th>
+      <th scope="col">START TIME</th>
+      <th scope="col">END TIME</th>
+      <th scope="col">VACCINE</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  {% for i in new %}
+  <tr>
+      <td>{{i.user.child_name}}</td>
+      <td>{{i.user.child_age}}</td>
+      <td>{{i.schedule.hospital}}</td>
+      <td>{{i.schedule.date}}</td>
+      <td>{{i.schedule.start_time}}</td>
+      <td>{{i.schedule.end_time}}</td>
+      <td>{{i.schedule.vaccine}}</td>
+      <td>
+      {% if i.status == 0 %}
+      <a  type="button" class="btn btn-success" href="{% url 'approve_appointment' i.id %}">Accept</a>
+     <form action="{% url 'reject_appointment' i.id %}" method="post" style="display:inline" onsubmit="window.mytest()">
+{% csrf_token %}
+      <button class="btn btn-danger">Reject</button>
+      </form>
+         {% elif i.status == 1 %}
+         <button type="button" class="btn btn-success">Appointment confirmed</button>
+         {% else %}
+         <button type="button" class="btn btn-danger">Rejected</button>
+         {% endif %}
+     </td>
+  </tr>
+  {%empty%}
+  <tr>
+      <td colspan="7"><h2>NO RESULT FOUND</h2></td>
+  </tr>
+
+
+
+    {% endfor %}
+</table>
+</div>
+<script type="text/javascript">
+    window.mytest = function()
+    {var isValid = confirm('Are you sure want to reject?');if (!isValid){ event.preventDefault();
+    }}
+</script>
+{% endblock %}

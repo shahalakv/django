@@ -2,6 +2,11 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="card" style="width:600px;margin-left:100px;margin-top:70px;">
+    {% for message in messages %}
+    <div class="alert alert-primary"role="alert">
+        {{message}}
+    </div>
+        {% endfor %}
  <table class="table">
   <tbody>
   <tr class="table-info">

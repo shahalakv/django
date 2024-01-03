@@ -24,7 +24,7 @@ def stud_update(request, up):
     taskupdate = Card.objects.get(id=up)
     updateform = PersonForm(instance=taskupdate)
     if request.method == 'POST':
-        updateform=PersonForm(request.POST,instance=taskupdate)
+        updateform=PersonForm(request.POST, instance=taskupdate)
         if updateform.is_valid():
             updateform.save()
             return redirect("stud_view")

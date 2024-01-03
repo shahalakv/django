@@ -1,9 +1,9 @@
-from django.core.checks import messages
+from django.contrib import messages
 from django.shortcuts import redirect, render
 
 from vacapp.admin_views import vaccine
 from vacapp.form import ComplaintForm, AppointmentForm
-from vacapp.models import Complaint, Appointment, Reportcard, Vaccination, Book_Appointment, Vaccine
+from vacapp.models import Complaint, Appointment, Report_Card, Vaccination, Book_Appointment, Vaccine
 
 
 def schedule_viewz(request):
@@ -45,29 +45,33 @@ def complaint_status(request):
     return render(request, 'usertemp/complaint_status.html', {"new": new})
 
 def reportcard_viewz(request):
-    new = Reportcard.objects.all()
+    new = Report_Card.objects.all()
     return render(request, 'usertemp/reportcard_viewz.html', {'new': new})
+
 def profile(request):
     new = Vaccination.objects.filter(username=request.user)
-
     return render(request, 'usertemp/profile.html', {"new": new})
 
 def book_appointment(request, id):
     schedule = Appointment.objects.get(id=id)
     data = request.user
-    vaccine_name = Vaccine.objects.get(id=id)
-    print(data)
-    # u = Vaccination.objects.get(user=data)
-    appointment = Book_Appointment.objects.filter(user_id=id, schedule=schedule)
+    appointment = Book_Appointment.objects.filter(user_id=data, schedule=schedule)
     if appointment.exists():
-        # messages.info(request, 'you have already requested appointment for this schedule')
+        messages.info(request, 'you have already requested appointment for this schedule')
         return redirect('schedule_viewz')
     else:
         if request.method == 'POST':
             obj = Book_Appointment()
             obj.user = data
             obj.schedule = schedule
-            obj.vaccine_name = vaccine_name
+            obj.vaccine_name = schedule.vaccine
             obj.save()
             return redirect('schedule_viewz')
     return render(request, 'usertemp/book_appointment.html', {'schedule': schedule})
+
+
+def view_appointment(request):
+    u = request.user
+    print(u)
+    new = Book_Appointment.objects.filter(user=u)
+    return render(request, 'usertemp/view_appointment.html', {"new": new})
